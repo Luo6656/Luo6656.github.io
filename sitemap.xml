@@ -2,72 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/undefined/</loc>
+    <loc>http://luo6656.github.io/2020/10/27/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%8E%9F%E7%90%86/</loc>
     
-    <lastmod>2020-10-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/undefined/</loc>
-    
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/undefined/</loc>
+    <loc>http://luo6656.github.io/2020/01/03/Linux/Shell/</loc>
     
-    <lastmod>2020-10-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/Linux%E5%B7%A5%E5%85%B7haha.md/</loc>
-    
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/articles-three/</loc>
+    <loc>http://luo6656.github.io/2019/12/06/Linux/Linux/</loc>
     
-    <lastmod>2020-10-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/undefined/</loc>
-    
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/articles-one/</loc>
+    <loc>http://luo6656.github.io/2020/06/17/BigDataFrame/Flume%E5%85%A5%E9%97%A8/</loc>
     
-    <lastmod>2020-10-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/articles-one/</loc>
-    
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/undefined/</loc>
+    <loc>http://luo6656.github.io/2020/07/05/BigDataFrame/Hive%E9%AB%98%E9%98%B6/</loc>
     
-    <lastmod>2020-10-26</lastmod>
+    <lastmod>2020-10-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://luo6656.github.io/2020/07/15/BigDataFrame/HBase%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2020-10-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://luo6656.github.io/2020/07/01/BigDataFrame/Hive%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2020-10-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://luo6656.github.io/2020/06/25/BigDataFrame/Kafka%E5%85%A5%E9%97%A8/</loc>
+    
+    <lastmod>2020-10-27</lastmod>
     
   </url>
   
 
   <url>
-    <loc>http://example.com/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <loc>http://luo6656.github.io/</loc>
+    <lastmod>2020-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -76,8 +69,15 @@
 
   
   <url>
-    <loc>http://example.com/categories/Linux/</loc>
-    <lastmod>2020-10-26</lastmod>
+    <loc>http://luo6656.github.io/categories/Linux/</loc>
+    <lastmod>2020-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://luo6656.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/</loc>
+    <lastmod>2020-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
