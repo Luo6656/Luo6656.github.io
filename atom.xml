@@ -6,18 +6,25 @@
   <link href="http://luo6656.github.io/atom.xml" rel="self"/>
   
   <link href="http://luo6656.github.io/"/>
-  <updated>2020-10-27T07:50:13.814Z</updated>
+  <updated>2020-10-30T02:46:07.291Z</updated>
   <id>http://luo6656.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>数据仓库</title>
-    <link href="http://luo6656.github.io/2020/10/27/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
-    <id>http://luo6656.github.io/2020/10/27/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/</id>
-    <published>2020-10-27T07:50:13.814Z</published>
-    <updated>2020-10-27T07:50:13.814Z</updated>
+    <link href="http://luo6656.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    <id>http://luo6656.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/</id>
+    <published>2020-09-17T16:00:00.000Z</published>
+    <updated>2020-10-30T02:46:07.291Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="数据仓库"><a href="#数据仓库" class="headerlink" title="数据仓库"></a>数据仓库</h1><h3 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h3><p>数据仓库（Data Warehouse）简称DW或DWH，是数据库的一种概念上的升级，可以说是为满足新需求设计的一种新数据库，而这个数据库是需容纳更多的数据，更加庞大的数据集，从逻辑上讲数据仓库和数据库是没有什么区别的。为企业所有级别的决策制定过程，提供所有类型数据支撑的战略集合，主要是用于数据挖掘和数据分析，以建立数据沙盘为基础，为消灭消息孤岛和支持决策为目的而创建的。</p><h3 id="二、数据仓库分层"><a href="#二、数据仓库分层" class="headerlink" title="二、数据仓库分层"></a>二、数据仓库分层</h3><h5 id="1-ODS层（原始数据层）"><a href="#1-ODS层（原始数据层）" class="headerlink" title="1. ODS层（原始数据层）"></a>1. ODS层（原始数据层）</h5><p>存放原始数据，直接加载原始日志、数据，数据保持原貌不做处理</p><h5 id="2-DWD层（明细数据层）"><a href="#2-DWD层（明细数据层）" class="headerlink" title="2. DWD层（明细数据层）"></a>2. DWD层（明细数据层）</h5><p>结构和粒度与原始表保持一致，对ODS层数据进行清洗（去除空值，脏数据，超过极限范围的数据)</p><h5 id="3-DWS层（服务数据层）"><a href="#3-DWS层（服务数据层）" class="headerlink" title="3. DWS层（服务数据层）"></a>3. DWS层（服务数据层）</h5><p>进行轻度汇总</p><h5 id="4-ADS层（数据应用层）"><a href="#4-ADS层（数据应用层）" class="headerlink" title="4. ADS层（数据应用层）"></a>4. ADS层（数据应用层）</h5><p>为各个统计报表提供数据</p><h4 id="为什么要进行分层"><a href="#为什么要进行分层" class="headerlink" title="为什么要进行分层"></a>为什么要进行分层</h4><p>(1) 把复杂的问题简单化：将一个复杂的任务分解成多个步骤来完成，每一层只处理单一步骤，比较简单、并且方便定位问题</p><p>(2) 减少重复开发：规范数据分层，通过的中间层数据，能够减少极大的重复计算，增加一次计算结果的复用性。</p><p>(3) 隔离原始数据：不论是数据的异常还是数据的敏感性，都使真实数据与统计数据解耦开。</p><h3 id="二、数据仓库与数据库的区别"><a href="#二、数据仓库与数据库的区别" class="headerlink" title="二、数据仓库与数据库的区别"></a>二、数据仓库与数据库的区别</h3><h5 id="1-数据来源"><a href="#1-数据来源" class="headerlink" title="1. 数据来源"></a>1. 数据来源</h5><p>数据库的数据来源于业务，数据仓库的数据来自于多个数据源</p><h5 id="2-时间维度"><a href="#2-时间维度" class="headerlink" title="2. 时间维度"></a>2. 时间维度</h5><p>数据库保留的是当前的数据，数据仓库保留的数据是时间轴上的全部信息</p><h5 id="3-组织方式"><a href="#3-组织方式" class="headerlink" title="3. 组织方式"></a>3. 组织方式</h5><p>数据库面向<font color="red">业务</font>组织，数据仓库面向<font color="red">主题</font></p><h5 id="4-建模方式"><a href="#4-建模方式" class="headerlink" title="4. 建模方式"></a>4. 建模方式</h5><p>数据库服从范式建模，数据仓库一般是合理冗余的</p><h5 id="5-设计目的"><a href="#5-设计目的" class="headerlink" title="5. 设计目的"></a>5. 设计目的</h5><p>数据库以存储、管理为主，数据仓库以组织、计算为主</p><h3 id="三、数据仓库的存储方式"><a href="#三、数据仓库的存储方式" class="headerlink" title="三、数据仓库的存储方式"></a>三、数据仓库的存储方式</h3><h5 id="1-全量存储"><a href="#1-全量存储" class="headerlink" title="1. 全量存储"></a>1. 全量存储</h5><p>没有分区，会直接覆盖</p><h5 id="2-增量数据"><a href="#2-增量数据" class="headerlink" title="2. 增量数据"></a>2. 增量数据</h5><p>每个分区只存储当日从数据库表中增量抽取出的数据</p><h5 id="3-快照存储"><a href="#3-快照存储" class="headerlink" title="3. 快照存储"></a>3. 快照存储</h5><p>每个分区相当于一个全量表</p><h5 id="4-拉链存储"><a href="#4-拉链存储" class="headerlink" title="4. 拉链存储"></a>4. 拉链存储</h5><p>存储了数据的变化情况</p><h3 id="四、数仓的模型"><a href="#四、数仓的模型" class="headerlink" title="四、数仓的模型"></a>四、数仓的模型</h3><h5 id="1-星型模型"><a href="#1-星型模型" class="headerlink" title="1. 星型模型"></a>1. 星型模型</h5><h5 id="2-雪花模型"><a href="#2-雪花模型" class="headerlink" title="2. 雪花模型"></a>2. 雪花模型</h5><h5 id="3-星座模型"><a href="#3-星座模型" class="headerlink" title="3. 星座模型"></a>3. 星座模型</h5><p>对比：雪花模型是将星型模型的维度进一步划分，使各个维度表满足规范化设计。而星座模型则是允许星形模式中出现多个事实表。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;数据仓库&quot;&gt;&lt;a href=&quot;#数据仓库&quot; class=&quot;headerlink&quot; title=&quot;数据仓库&quot;&gt;&lt;/a&gt;数据仓库&lt;/h1&gt;&lt;h3 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot; title=&quot;一、简介&quot;&gt;&lt;/a</summary>
+      
     
     
     
@@ -76,8 +83,19 @@
     <link href="http://luo6656.github.io/2020/07/28/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E5%8F%A5%E8%B0%83%E4%BC%98/"/>
     <id>http://luo6656.github.io/2020/07/28/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%AF%AD%E5%8F%A5%E8%B0%83%E4%BC%98/</id>
     <published>2020-07-27T16:00:00.000Z</published>
-    <updated>2020-10-27T06:33:38.346Z</updated>
+    <updated>2020-10-30T02:10:25.870Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="SQL语句调优"><a href="#SQL语句调优" class="headerlink" title="SQL语句调优"></a>SQL语句调优</h1><h3 id="一、Mysql的整体执行过程"><a href="#一、Mysql的整体执行过程" class="headerlink" title="一、Mysql的整体执行过程"></a>一、Mysql的整体执行过程</h3><p><img src="https://i.loli.net/2020/10/30/oGBKYNmygnJI4us.png" alt="image-20201030100953732"></p><h3 id="二、sql的执行顺序"><a href="#二、sql的执行顺序" class="headerlink" title="二、sql的执行顺序"></a>二、sql的执行顺序</h3><p><img src="https://i.loli.net/2020/10/30/Nvs4hSaPoC1ku9Y.png" alt="image-20201030100114897"></p><p>(1) from</p><p> 第一步就是选择出from关键词后面跟的表,这也是sql执行的第一步:表示要从数据库中执行哪张表。</p><p>(2) join on</p><p>join是表示要关联的表，on是连接的条件。通过from和join on选择出需要执行的数据库表T和S,产生笛卡尔积,生成T和S合并的临时中间表Temp1。on:确定表的绑定关系,通过on产生临时中间表Temp2.</p><p>(3) where</p><p>where表示筛选,根据where后面的条件进行过滤,按照指定的字段的值(如果有and连接符会进行联合筛选)从临时中间表Temp2中筛选需要的数据,注意如果在此阶段找不到数据，会直接返回客户端,不会往下进行.这个过程会生成一个临时中间表Temp3。注意在where中不可以使用聚合函数，聚合函数主要是(min\max\count\sum等函数)</p><a id="more"></a><p>(4) group by</p><p>group by是进行分组，对where条件过滤后的临时表Temp3按照固定的字段进行分组,产生临时中间表Temp4，这个过程只是数据的顺序发生改变,而数据总量不会变化,表中的数据以组的形式存在</p><p>(5) Having</p><p>对临时中间表Temp4进行聚合,这里可以为count等计数，然后产生中间表Temp5，在此阶段可以使用select中的别名</p><p>(6) select</p><p>对分组聚合完的表挑选出需要查询的数据,如果为会解析为所有数据,此时会产生中间表Temp6</p><p>(7) Distinct</p><p>distinct对所有的数据进行去重,此时如果有min、max函数会执行字段函数计算，然后产生临时表Temp7</p><p>(8) Order by</p><p>排序</p><p>(9) limit</p><p>需要多少条数据</p><h3 id="三、SQL调优"><a href="#三、SQL调优" class="headerlink" title="三、SQL调优"></a>三、SQL调优</h3><p>SQL调优的本质就是充分利用索引，而不让索引失效</p><p>(1) 尽量 使用全值匹配</p><p>(2) 最佳左前缀</p><p>(3) 避免在索引列上做计算</p><p>(4) 避免在索引列上做值类型转换</p><p>(5) 减少使用select *</p><p>(6) like后模糊匹配会造成索引失效</p><p>(7) 减少使用or，使用union all或union代替</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;SQL语句调优&quot;&gt;&lt;a href=&quot;#SQL语句调优&quot; class=&quot;headerlink&quot; title=&quot;SQL语句调优&quot;&gt;&lt;/a&gt;SQL语句调优&lt;/h1&gt;&lt;h3 id=&quot;一、Mysql的整体执行过程&quot;&gt;&lt;a href=&quot;#一、Mysql的整体执行过程&quot; class=&quot;headerlink&quot; title=&quot;一、Mysql的整体执行过程&quot;&gt;&lt;/a&gt;一、Mysql的整体执行过程&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/10/30/oGBKYNmygnJI4us.png&quot; alt=&quot;image-20201030100953732&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;二、sql的执行顺序&quot;&gt;&lt;a href=&quot;#二、sql的执行顺序&quot; class=&quot;headerlink&quot; title=&quot;二、sql的执行顺序&quot;&gt;&lt;/a&gt;二、sql的执行顺序&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/10/30/Nvs4hSaPoC1ku9Y.png&quot; alt=&quot;image-20201030100114897&quot;&gt;&lt;/p&gt;
+&lt;p&gt;(1) from&lt;/p&gt;
+&lt;p&gt; 第一步就是选择出from关键词后面跟的表,这也是sql执行的第一步:表示要从数据库中执行哪张表。&lt;/p&gt;
+&lt;p&gt;(2) join on&lt;/p&gt;
+&lt;p&gt;join是表示要关联的表，on是连接的条件。通过from和join on选择出需要执行的数据库表T和S,产生笛卡尔积,生成T和S合并的临时中间表Temp1。on:确定表的绑定关系,通过on产生临时中间表Temp2.&lt;/p&gt;
+&lt;p&gt;(3) where&lt;/p&gt;
+&lt;p&gt;where表示筛选,根据where后面的条件进行过滤,按照指定的字段的值(如果有and连接符会进行联合筛选)从临时中间表Temp2中筛选需要的数据,注意如果在此阶段找不到数据，会直接返回客户端,不会往下进行.这个过程会生成一个临时中间表Temp3。注意在where中不可以使用聚合函数，聚合函数主要是(min\max\count\sum等函数)&lt;/p&gt;</summary>
     
     
     
@@ -88,11 +106,42 @@
   
   <entry>
     <title>Mysql底层原理</title>
-    <link href="http://luo6656.github.io/2020/07/25/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%8E%9F%E7%90%86/"/>
-    <id>http://luo6656.github.io/2020/07/25/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%8E%9F%E7%90%86/</id>
-    <published>2020-07-24T16:00:00.000Z</published>
-    <updated>2020-10-27T06:29:55.822Z</updated>
+    <link href="http://luo6656.github.io/2020/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%8E%9F%E7%90%86/"/>
+    <id>http://luo6656.github.io/2020/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql%E5%8E%9F%E7%90%86/</id>
+    <published>2020-07-25T16:00:00.000Z</published>
+    <updated>2020-10-30T01:56:35.194Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="Mysql数据库底层原理"><a href="#Mysql数据库底层原理" class="headerlink" title="Mysql数据库底层原理"></a>Mysql数据库底层原理</h1><h3 id="一、索引"><a href="#一、索引" class="headerlink" title="一、索引"></a>一、索引</h3><h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h4><p>索引是一种数据结构，用于帮助我们在大量数据中快速定位到我们想要查找的数据。<br>索引最形象的比喻就是图书的目录了。注意这里的大量，数据量大了索引才显得有意义，如果我想要在 [1,2,3,4] 中找到 4 这个数据，直接对全数据检索也很快，没有必要费力气建索引再去查找。</p><h4 id="2-种类"><a href="#2-种类" class="headerlink" title="2. 种类"></a>2. 种类</h4><ol><li>B+树索引</li><li>Hash索引</li><li>全文索引</li></ol><h3 id="二、为何使用B-树结构"><a href="#二、为何使用B-树结构" class="headerlink" title="二、为何使用B+树结构"></a>二、为何使用B+树结构</h3><a id="more"></a><h4 id="1-二叉树"><a href="#1-二叉树" class="headerlink" title="1. 二叉树"></a>1. 二叉树</h4><p>如果采用二叉树，如果所有节点都在树的右子树上时，查询就相当于进行全表扫描了。</p><h4 id="2-AVL树"><a href="#2-AVL树" class="headerlink" title="2. AVL树"></a>2. AVL树</h4><p>由于树倾斜问题，所以采用平衡二叉树结构，</p><p>由于AVL树每个节点只能存储一个键值和数据，所以树的高度会很高，并且查询会进行多次磁盘IO，查找数据的效率会很低。</p><h4 id="3-B树"><a href="#3-B树" class="headerlink" title="3. B树"></a>3. B树</h4><p><img src="https://i.loli.net/2020/10/30/OTh5LfoPaBVR8t7.png" alt="image-20201030095213544"></p><p>B 树相对于平衡二叉树，每个节点存储了更多的键值（key）和数据（data），并且每个节点拥有更多的子节点，子节点的个数一般称为阶，上述图中的 B 树为 3 阶 B 树，高度也会很低。</p><p>查找流程</p><p>(1) 先找到根节点也就是页 1，判断 28 在键值 17 和 35 之间，那么我们根据页 1 中的指针 p2 找到页 3。</p><p>(2) 将 28 和页 3 中的键值相比较，28 在 26 和 30 之间，我们根据页 3 中的指针 p2 找到页 8。</p><p>(3) 将 28 和页 8 中的键值相比较，发现有匹配的键值 28，键值 28 对应的用户信息为（28，bv）。</p><h4 id="4-B-树"><a href="#4-B-树" class="headerlink" title="4. B+树"></a>4. B+树</h4><p><img src="https://i.loli.net/2020/10/30/MczOEHBkW76NFCJ.png" alt="image-20201030095326731"></p><p>根据上图我们来看下 B+ 树和 B 树有什么不同：</p><p>(1) B+ 树非叶子节点上是不存储数据的，仅存储键值，而 B 树节点中不仅存储键值，也会存储数据。之所以这么做是因为在数据库中页的大小是固定的，InnoDB 中页的默认大小是 16KB。如果不存储数据，那么就会存储更多的键值，相应的树的阶数（节点的子节点树）就会更大，树就会更矮更胖，如此一来我们查找数据进行磁盘的 IO 次数又会再次减少，数据查询的效率也会更快。</p><p>(2) 因为 B+ 树索引的所有数据均存储在叶子节点，而且数据是按照顺序排列的。那么 B+ 树使得范围查找，排序查找，分组查找以及去重查找变得异常简单。而 B 树因为数据分散在各个节点，要实现这一点是很不容易的。</p><p> B+ 树中各个页之间是通过双向链表连接的，叶子节点中的数据是通过单向链表连接的。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Mysql数据库底层原理&quot;&gt;&lt;a href=&quot;#Mysql数据库底层原理&quot; class=&quot;headerlink&quot; title=&quot;Mysql数据库底层原理&quot;&gt;&lt;/a&gt;Mysql数据库底层原理&lt;/h1&gt;&lt;h3 id=&quot;一、索引&quot;&gt;&lt;a href=&quot;#一、索引&quot; class=&quot;headerlink&quot; title=&quot;一、索引&quot;&gt;&lt;/a&gt;一、索引&lt;/h3&gt;&lt;h4 id=&quot;1-定义&quot;&gt;&lt;a href=&quot;#1-定义&quot; class=&quot;headerlink&quot; title=&quot;1. 定义&quot;&gt;&lt;/a&gt;1. 定义&lt;/h4&gt;&lt;p&gt;索引是一种数据结构，用于帮助我们在大量数据中快速定位到我们想要查找的数据。&lt;br&gt;索引最形象的比喻就是图书的目录了。注意这里的大量，数据量大了索引才显得有意义，如果我想要在 [1,2,3,4] 中找到 4 这个数据，直接对全数据检索也很快，没有必要费力气建索引再去查找。&lt;/p&gt;
+&lt;h4 id=&quot;2-种类&quot;&gt;&lt;a href=&quot;#2-种类&quot; class=&quot;headerlink&quot; title=&quot;2. 种类&quot;&gt;&lt;/a&gt;2. 种类&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;B+树索引&lt;/li&gt;
+&lt;li&gt;Hash索引&lt;/li&gt;
+&lt;li&gt;全文索引&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;二、为何使用B-树结构&quot;&gt;&lt;a href=&quot;#二、为何使用B-树结构&quot; class=&quot;headerlink&quot; title=&quot;二、为何使用B+树结构&quot;&gt;&lt;/a&gt;二、为何使用B+树结构&lt;/h3&gt;</summary>
+    
+    
+    
+    <category term="数据库" scheme="http://luo6656.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MySql数据库的引擎</title>
+    <link href="http://luo6656.github.io/2020/07/25/%E6%95%B0%E6%8D%AE%E5%BA%93/MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%BC%95%E6%93%8E/"/>
+    <id>http://luo6656.github.io/2020/07/25/%E6%95%B0%E6%8D%AE%E5%BA%93/MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%BC%95%E6%93%8E/</id>
+    <published>2020-07-24T16:00:00.000Z</published>
+    <updated>2020-10-30T01:35:58.916Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="MySql数据库的引擎"><a href="#MySql数据库的引擎" class="headerlink" title="MySql数据库的引擎"></a>MySql数据库的引擎</h1><h3 id="1-InnoDB"><a href="#1-InnoDB" class="headerlink" title="1. InnoDB"></a>1. InnoDB</h3><h5 id="1-数据库文件"><a href="#1-数据库文件" class="headerlink" title="1. 数据库文件"></a>1. 数据库文件</h5><p>(1) .frm 是表的定义文件，主要是表结构</p><p>(2) .idb是索引和数据，因为InnoDB引擎叶子节点上存储的是索引和数据。</p><h5 id="2-存储结构"><a href="#2-存储结构" class="headerlink" title="2. 存储结构"></a>2. 存储结构</h5><p>采用B+树存储数据</p><a id="more"></a><h5 id="3-注意点"><a href="#3-注意点" class="headerlink" title="3. 注意点"></a>3. 注意点</h5><p>(1) InnoDB 中存在表锁和行锁，不过行锁是在命中索引的情况下才会起作用。</p><p>(2) InnoDB 支持事务，且支持四种隔离级别（读未提交、读已提交、可重复读、串行化），默认的为可重复读；而在 Oracle 数据库中，只支持串行化级别和读已提交这两种级别，其中默认的为读已提交级别。</p><h5 id="4-InnoBD是聚集索引"><a href="#4-InnoBD是聚集索引" class="headerlink" title="4. InnoBD是聚集索引"></a>4. InnoBD是聚集索引</h5><p>(1) 聚集索引表示表中存储的数据按照索引的顺序存储，检索效率比非聚集索引高，但对数据更新影响较大。</p><p>(2) 聚簇索引的数据的物理存放顺序与索引顺序是一致的，即：只要索引是相邻的，那么对应的数据一定也是相邻地存放在磁盘上的。<font color="red">如果主键不是自增id</font>，那么可以想象，它会干些什么，<font color="red">不断地调整数据的物理地址、分页</font>，当然也有其他一些措施来减少这些操作，但却无法彻底避免。但，如果是自增的，那就简单了，它只需要一页一页地写，索引结构相对紧凑，磁盘碎片少，效率也高。因此采用innoDB存储引擎的数据库，<font color="red">表一定要设置自增列作为主键，这样才能提高数据查询以及插入的效率</font>。</p><h3 id="2-MyISAM"><a href="#2-MyISAM" class="headerlink" title="2. MyISAM"></a>2. MyISAM</h3><h5 id="1-数据库文件-1"><a href="#1-数据库文件-1" class="headerlink" title="1. 数据库文件"></a>1. 数据库文件</h5><p>(1) .frm是表结构</p><p>(2) .MYD是Data数据</p><p>(3) .MYI是Index数据，从MYI中获取数据的磁盘指针到MYD中取数据。</p><h5 id="2-存储结构-1"><a href="#2-存储结构-1" class="headerlink" title="2. 存储结构"></a>2. 存储结构</h5><p>采用B+树存储数据</p><h5 id="3-注意点-1"><a href="#3-注意点-1" class="headerlink" title="3. 注意点"></a>3. 注意点</h5><p>(1) Myisam 只支持表锁，且不支持事务。Myisam 由于有单独的索引文件，在读取数据方面的性能很高 。</p><h5 id="4-MyISAM是非聚集索引"><a href="#4-MyISAM是非聚集索引" class="headerlink" title="4. MyISAM是非聚集索引"></a>4. MyISAM是非聚集索引</h5><p>(1) 非聚集索引表示数据存储在一个地方，索引存储在另一个地方，索引带有指针指向数据的存储位置，非聚集索引检索效率比聚集索引低，但对数据更新影响较小。</p><p>(2) MyISAM的主索引并非聚簇索引，那么他的数据的物理地址必然是凌乱的，拿到这些物理地址，按照合适的算法进行I/O读取，于是开始不停的寻道不停的旋转。聚簇索引则只需一次I/O。<br>(3) 如果涉及到大数据量的排序、全表扫描、count之类的操作的话，还是MyISAM占优势些，因为索引所占空间小，这些操作是需要在内存中完成的。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;MySql数据库的引擎&quot;&gt;&lt;a href=&quot;#MySql数据库的引擎&quot; class=&quot;headerlink&quot; title=&quot;MySql数据库的引擎&quot;&gt;&lt;/a&gt;MySql数据库的引擎&lt;/h1&gt;&lt;h3 id=&quot;1-InnoDB&quot;&gt;&lt;a href=&quot;#1-InnoDB&quot; class=&quot;headerlink&quot; title=&quot;1. InnoDB&quot;&gt;&lt;/a&gt;1. InnoDB&lt;/h3&gt;&lt;h5 id=&quot;1-数据库文件&quot;&gt;&lt;a href=&quot;#1-数据库文件&quot; class=&quot;headerlink&quot; title=&quot;1. 数据库文件&quot;&gt;&lt;/a&gt;1. 数据库文件&lt;/h5&gt;&lt;p&gt;(1) .frm 是表的定义文件，主要是表结构&lt;/p&gt;
+&lt;p&gt;(2) .idb是索引和数据，因为InnoDB引擎叶子节点上存储的是索引和数据。&lt;/p&gt;
+&lt;h5 id=&quot;2-存储结构&quot;&gt;&lt;a href=&quot;#2-存储结构&quot; class=&quot;headerlink&quot; title=&quot;2. 存储结构&quot;&gt;&lt;/a&gt;2. 存储结构&lt;/h5&gt;&lt;p&gt;采用B+树存储数据&lt;/p&gt;</summary>
     
     
     
@@ -379,28 +428,6 @@
 &lt;li&gt;fit_transform() = fit() + transform()&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&quot;估计器&quot;&gt;&lt;a href=&quot;#估计器&quot; class=&quot;headerlink&quot; title=&quot;估计器&quot;&gt;&lt;/a&gt;估计器&lt;/h4&gt;</summary>
-    
-    
-    
-    <category term="机器学习" scheme="http://luo6656.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习之k-近邻算法</title>
-    <link href="http://luo6656.github.io/2019/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bk-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/"/>
-    <id>http://luo6656.github.io/2019/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bk-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/</id>
-    <published>2019-07-07T16:00:00.000Z</published>
-    <updated>2020-10-27T06:41:47.814Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="k-近邻算法-KNN"><a href="#k-近邻算法-KNN" class="headerlink" title="k-近邻算法(KNN)"></a>k-近邻算法(KNN)</h3><ul><li>定义：如果一个样本在特征空间中的<font color=red>k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别</font>，则该样本也属于这个类别。</li><li>来源：KNN算法最早由Cover和Hart提出的一种分类算法。</li></ul><a id="more"></a><h4 id="计算距离公式"><a href="#计算距离公式" class="headerlink" title="计算距离公式"></a>计算距离公式</h4><ul><li>两个样本的距离可以通过如下公式计算，又称为<font color=red>欧式距离</font>，比如说，a(a1,a2,a3),b(b1,b2,b3)</li><li><img src="https://img-blog.csdnimg.cn/20190901134615992.png" alt="欧式距离"></li><li>k-近邻算法需要标准化</li></ul><h4 id="sklearn-k-近邻算法API"><a href="#sklearn-k-近邻算法API" class="headerlink" title="sklearn k-近邻算法API"></a>sklearn k-近邻算法API</h4><ul><li><code>sklearn.neighbors.KNeightborsClassifier(n_neighbors=5,algorithm=&#39;auto&#39;)</code></li><li><code>n_neighbors</code>:int类型，可选(默认=5)，n_neighbors查询默认使用的邻居数</li><li><code>algorithm</code>:{‘auto’,’ball_tree’,’kd_tree’,’brute’}，可选用于计算最近邻居的算法：’ball_tree’将会使用BallTree，’kd_tree’将会使用KDTree。’auto’将会尝试根据传递给fit方法的值来决定最合适的算法。(不同的实现方式会影响效率)</li></ul><h4 id="k的取值问题"><a href="#k的取值问题" class="headerlink" title="k的取值问题"></a>k的取值问题</h4><ul><li>k值取很小<ul><li>易受异常点影响</li></ul></li><li>k值取很大<ul><li>易受k值数量(类别)波动</li></ul></li><li>性能问题<ul><li>时间复杂度高</li><li>样本会越来越大</li></ul></li><li>参数调优</li></ul><h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><ul><li>优点<ul><li>简单，易于理解，易于实现，<font color=red>无需估计参数，无需训练</font></li></ul></li><li>缺点<ul><li>懒惰算法，对测试样本分类时的计算量大，内存开销大</li><li>必须指定K值，K值选择不当则分类精度不能保证</li></ul></li></ul><h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><ul><li>小数据场景，几千至几万样本，具体场景具体业务去测试</li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;k-近邻算法-KNN&quot;&gt;&lt;a href=&quot;#k-近邻算法-KNN&quot; class=&quot;headerlink&quot; title=&quot;k-近邻算法(KNN)&quot;&gt;&lt;/a&gt;k-近邻算法(KNN)&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;定义：如果一个样本在特征空间中的&lt;font color=red&gt;k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别&lt;/font&gt;，则该样本也属于这个类别。&lt;/li&gt;
-&lt;li&gt;来源：KNN算法最早由Cover和Hart提出的一种分类算法。&lt;/li&gt;
-&lt;/ul&gt;</summary>
     
     
     
