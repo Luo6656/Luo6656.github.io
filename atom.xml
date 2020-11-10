@@ -6,10 +6,36 @@
   <link href="http://luo6656.github.io/atom.xml" rel="self"/>
   
   <link href="http://luo6656.github.io/"/>
-  <updated>2020-11-10T03:25:19.535Z</updated>
+  <updated>2020-11-10T07:23:57.721Z</updated>
   <id>http://luo6656.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据仓库架构</title>
+    <link href="http://luo6656.github.io/2020/09/26/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%BB%BA%E6%A8%A1/"/>
+    <id>http://luo6656.github.io/2020/09/26/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%BB%BA%E6%A8%A1/</id>
+    <published>2020-09-25T16:00:00.000Z</published>
+    <updated>2020-11-10T07:23:57.721Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数据仓库-建模方法"><a href="#数据仓库-建模方法" class="headerlink" title="数据仓库-建模方法"></a>数据仓库-建模方法</h1><h3 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h3><h4 id="OLTP系统建模方法"><a href="#OLTP系统建模方法" class="headerlink" title="OLTP系统建模方法"></a>OLTP系统建模方法</h4><ul><li>OLTP(在线事务处理)系统中，主要操作是随机读写</li><li>为了保证数据的一致性、减少冗余，常使用关系模型</li><li>在关系模型中，常使用3NF来减少冗余</li></ul><h4 id="OLAP系统"><a href="#OLAP系统" class="headerlink" title="OLAP系统"></a>OLAP系统</h4><h5 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h5><ol><li>OLAP系统，主要操作是<font color="red">复杂分析查询</font>；关注数据聚合，以及分析、处理性能</li><li>OLAP根据数据存储方法不同，又分为ROLAP、MOLAP、HOLAP<a id="more"></a></li></ol><h5 id="2-分类"><a href="#2-分类" class="headerlink" title="2. 分类"></a>2. 分类</h5><ul><li><font color="red">ROLAP(Relation)</font> : 使用关系模型构建，存储系统一般为RDBMS</li><li><font color="red">MOLAP(Multidimensional)</font> : 预先聚合计算，使用多维数组的形式保存数据结果，加快查询分析时间</li><li><font color="red">HOLAP(Hybrid)</font> : ROLAP和MOLAP两者的集成；如底层是关系型的，高层是多维矩阵型的；查询效率高于ROLAP，低于MOLAP</li><li>ROLAP依赖于模型设计，MOLAP和HOLAP依赖于产品的选型</li></ul><h3 id="二、ROLAP"><a href="#二、ROLAP" class="headerlink" title="二、ROLAP"></a>二、ROLAP</h3><h4 id="建模方法"><a href="#建模方法" class="headerlink" title="建模方法"></a>建模方法</h4><p>维度模型适合数据仓库需要经常发生变化的情况。</p><h5 id="1-ER模型"><a href="#1-ER模型" class="headerlink" title="1. ER模型"></a>1. ER模型</h5><ul><li>出发点是整合数据，为数据分析决策服务</li><li>需要全面了解业务和数据</li><li>实施周期昌</li><li>对建模人员能力要求不高</li></ul><h5 id="2-维度模型"><a href="#2-维度模型" class="headerlink" title="2. 维度模型"></a>2. 维度模型</h5><ul><li>为分析需求服务，更快完成需求分析</li><li>具有较好大规模复杂查询相应性能</li><li><font color="red">最流行的数仓建模方法</font></li></ul><h5 id="3-Data-Value"><a href="#3-Data-Value" class="headerlink" title="3.Data Value"></a>3.Data Value</h5><ul><li>ER模型的衍生</li><li>强调数据的历史性、可追溯、原子性</li><li>弱化一致性处理和整合</li><li>引入范式，应对原系统的扩展性</li></ul><h5 id="4-Anchor"><a href="#4-Anchor" class="headerlink" title="4.Anchor"></a>4.Anchor</h5><ul><li>Data Value模型的衍生</li><li>初衷为设计一个高度可扩展模型</li><li>会带来较多的join操作</li></ul><h4 id="维度模型"><a href="#维度模型" class="headerlink" title="维度模型"></a>维度模型</h4><p>维度模型中，表被分为维度表、事实表，维度是对事实的一种组织</p><p>维度一般包含分类、时间、地域</p><p>维度模型分为星型模型、雪花模型、星座模型</p><p>维度模型建立后，方便对数据进行多维分析</p><h5 id="1-星型模型"><a href="#1-星型模型" class="headerlink" title="1. 星型模型"></a>1. 星型模型</h5><p><img src="https://i.loli.net/2020/11/10/CmSca6DftOEWrp7.png" alt="image-20201110141723052"></p><p>只有一层维度，只有一个事实表带着一层维度表，分析性能最优</p><h5 id="2-雪花模型"><a href="#2-雪花模型" class="headerlink" title="2. 雪花模型"></a>2. 雪花模型</h5><p><img src="https://i.loli.net/2020/11/10/OgScAaMQBYoZ5EL.png" alt="image-20201110141858151"></p><p>多层维度，比较接近三范式，较为灵活</p><h5 id="3-星座模型"><a href="#3-星座模型" class="headerlink" title="3. 星座模型"></a>3. 星座模型</h5><p><img src="https://i.loli.net/2020/11/10/bY6VnL8C57gIkry.png" alt="image-20201110142002597"></p><p>星座模型基于多个事实表，事实表之间会共享一些维度表</p><p>随着业务的增长</p><h4 id="宽表模型"><a href="#宽表模型" class="headerlink" title="宽表模型"></a>宽表模型</h4><ul><li>宽表模型是维度模型的衍生，适合join性能不佳的数据仓库产品</li><li>宽表模型将维度冗余到实施表中，形成宽表，以此减少join操作</li></ul><h3 id="三、MOLAP"><a href="#三、MOLAP" class="headerlink" title="三、MOLAP"></a>三、MOLAP</h3><p>实际就是一种以空间换时间的方式</p><ul><li>MOLAP将数据进行预计算，并将聚合结果存储到CUBE模型中</li><li>CUBE模型以多维数据的形式，物化到存储系统中，加快后续的查询</li><li>生成CUBE需要大量的时间，空间，维度预处理可能会导致数据膨胀</li></ul><p><img src="https://i.loli.net/2020/11/10/xdc9KY8DaTpLHtG.png" alt="image-20201110145727029"></p><h3 id="四、多维分析"><a href="#四、多维分析" class="headerlink" title="四、多维分析"></a>四、多维分析</h3><p>OLAP主要操作是复杂查询，可以多表关联，使用count、sum、avg等聚合函数</p><p>OLAP对复杂查询操作做了值观的定义，包括钻取、切片、切块、旋转</p><p><img src="https://i.loli.net/2020/11/10/aZwBzeQsJnTX26W.png" alt="image-20201110150752383"></p><h3 id="五、表"><a href="#五、表" class="headerlink" title="五、表"></a>五、表</h3><h4 id="表类型"><a href="#表类型" class="headerlink" title="表类型"></a>表类型</h4><h5 id="1-维度表"><a href="#1-维度表" class="headerlink" title="1.维度表"></a>1.维度表</h5><h5 id="2-事实表"><a href="#2-事实表" class="headerlink" title="2.事实表"></a>2.事实表</h5><p><strong>事务事实表</strong></p><p>随着业务不断产生的数据，一旦产生不会再变化，如交易流水、操作日志、出库入库记录</p><p><img src="https://i.loli.net/2020/11/10/2C3JqOHdL8sEoDW.png" alt="image-20201110150959052"></p><p><strong>周期快照事实表</strong></p><ul><li>随着业务周期型的推进而变化，完成间隔周期内的度量统计，如年、季度累计</li><li>使用周期+状态度量的组合，如年累计订单数，年是周期，订单总数是量度</li></ul><p><img src="https://i.loli.net/2020/11/10/RTWUJmS2l7oLe89.png" alt="image-20201110151039241"></p><p><strong>累计快照事实表</strong></p><ul><li>记录不确定周期的度量统计，完全覆盖一个事实的生命周期，如订单状态表</li><li>通常有多个时间字段，用于记录生命周期中的关键时间点</li><li>只有一条记录，针对此记录不断更新</li></ul><p><img src="https://i.loli.net/2020/11/10/MxcQ1kjmfihopeD.png" alt="image-20201110151148701"></p><p><strong>拉链表</strong></p><ul><li>拉链表记录每条信息的生命周期，用于保留数据的所有历史（变更）状态</li><li>拉链表将表数据的随机修改方式，变为顺序追加</li></ul><p><img src="https://i.loli.net/2020/11/10/p2w1AMUq9yJl4Rk.png" alt="image-20201110151553782"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;数据仓库-建模方法&quot;&gt;&lt;a href=&quot;#数据仓库-建模方法&quot; class=&quot;headerlink&quot; title=&quot;数据仓库-建模方法&quot;&gt;&lt;/a&gt;数据仓库-建模方法&lt;/h1&gt;&lt;h3 id=&quot;一、基本概念&quot;&gt;&lt;a href=&quot;#一、基本概念&quot; class=&quot;headerlink&quot; title=&quot;一、基本概念&quot;&gt;&lt;/a&gt;一、基本概念&lt;/h3&gt;&lt;h4 id=&quot;OLTP系统建模方法&quot;&gt;&lt;a href=&quot;#OLTP系统建模方法&quot; class=&quot;headerlink&quot; title=&quot;OLTP系统建模方法&quot;&gt;&lt;/a&gt;OLTP系统建模方法&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;OLTP(在线事务处理)系统中，主要操作是随机读写&lt;/li&gt;
+&lt;li&gt;为了保证数据的一致性、减少冗余，常使用关系模型&lt;/li&gt;
+&lt;li&gt;在关系模型中，常使用3NF来减少冗余&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;OLAP系统&quot;&gt;&lt;a href=&quot;#OLAP系统&quot; class=&quot;headerlink&quot; title=&quot;OLAP系统&quot;&gt;&lt;/a&gt;OLAP系统&lt;/h4&gt;&lt;h5 id=&quot;1-基本概念&quot;&gt;&lt;a href=&quot;#1-基本概念&quot; class=&quot;headerlink&quot; title=&quot;1.基本概念&quot;&gt;&lt;/a&gt;1.基本概念&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;OLAP系统，主要操作是&lt;font color=&quot;red&quot;&gt;复杂分析查询&lt;/font&gt;；关注数据聚合，以及分析、处理性能&lt;/li&gt;
+&lt;li&gt;OLAP根据数据存储方法不同，又分为ROLAP、MOLAP、HOLAP</summary>
+    
+    
+    
+    <category term="数据仓库" scheme="http://luo6656.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>数据仓库架构</title>
@@ -395,26 +421,6 @@
 &lt;li&gt;决策树思想的来源非常朴素，程序设计中的条件分支结构就是if-then结构，最早的决策树就是利用这类结构分割数据的一种分类学习方法&lt;/li&gt;
 &lt;li&gt;信息的单位：比特bite&lt;/li&gt;
 &lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="机器学习" scheme="http://luo6656.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习：数据预处理之One-Hot编码</title>
-    <link href="http://luo6656.github.io/2019/07/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81%EF%BC%88One-Hot)/"/>
-    <id>http://luo6656.github.io/2019/07/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81%EF%BC%88One-Hot)/</id>
-    <published>2019-07-15T16:00:00.000Z</published>
-    <updated>2020-10-27T06:49:17.777Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="数据预处理之独热编码-One-Hot）"><a href="#数据预处理之独热编码-One-Hot）" class="headerlink" title="数据预处理之独热编码(One-Hot）"></a>数据预处理之独热编码(One-Hot）</h3><h4 id="转载https-www-imooc-com-article-35900"><a href="#转载https-www-imooc-com-article-35900" class="headerlink" title="转载https://www.imooc.com/article/35900"></a>转载<a href="https://www.imooc.com/article/35900">https://www.imooc.com/article/35900</a></h4><p>在机器学习算法中，我们经常会遇到分类特征，例如：人的性别有男女，祖国有中国，美国，法国等。<br>这些特征值并不是连续的，而是离散的，无序的。通常我们需要对其进行特征数字化。</p><p>那什么是特征数字化呢？例子如下：</p><a id="more"></a><p>性别特征：[“男”，”女”]</p><p>祖国特征：[“中国”，”美国，”法国”]</p><p>运动特征：[“足球”，”篮球”，”羽毛球”，”乒乓球”]</p><p>假如某个样本（某个人），他的特征是这样的[“男”,”中国”,”乒乓球”]，我们可以用 [0,0,4] 来表示，但是这样的特征处理并不能直接放入机器学习算法中。因为类别之间是无序的（运动数据就是任意排序的）。</p><p>什么是独热编码（One-Hot）？</p><p>————————————————————————————————————————</p><p>One-Hot编码，又称为一位有效编码，主要是采用N位状态寄存器来对N个状态进行编码，每个状态都由他独立的寄存器位，并且在任意时候只有一位有效。</p><p>One-Hot编码是分类变量作为二进制向量的表示。这首先要求将分类值映射到整数值。然后，每个整数值被表示为二进制向量，除了整数的索引之外，它都是零值，它被标记为1。</p><p>One-Hot实际案例</p><p>————————————————————————————————————————</p><p>就拿上面的例子来说吧，性别特征：[“男”,”女”]，按照N位状态寄存器来对N个状态进行编码的原理，咱们处理后应该是这样的（这里只有两个特征，所以N=2）：</p><p>男  =&gt;  10</p><p>女  =&gt;  01</p><p>祖国特征：[“中国”，”美国，”法国”]（这里N=3）：</p><p>中国  =&gt;  100</p><p>美国  =&gt;  010</p><p>法国  =&gt;  001</p><p>运动特征：[“足球”，”篮球”，”羽毛球”，”乒乓球”]（这里N=4）：</p><p>足球  =&gt;  1000</p><p>篮球  =&gt;  0100</p><p>羽毛球  =&gt;  0010</p><p>乒乓球  =&gt;  0001</p><p>所以，当一个样本为[“男”,”中国”,”乒乓球”]的时候，完整的特征数字化的结果为：</p><p>[1，0，1，0，0，0，0，0，1]</p><p>下图可能会更好理解：</p><p><a href="https://img.mukewang.com/5b20f1b90001cc2202550045.jpg">https://img.mukewang.com/5b20f1b90001cc2202550045.jpg</a></p><p>One-Hot在python中的使用</p><p>————————————————————————————————————————</p><p>from sklearn import preprocessing  </p><p>enc = preprocessing.OneHotEncoder()<br>enc.fit([[0,0,3],[1,1,0],[0,2,1],[1,0,2]])  #这里一共有4个数据，3种特征</p><p>array = enc.transform([[0,1,3]]).toarray()  #这里使用一个新的数据来测试</p><p>print array   # [[ 1  0  0  1  0  0  0  0  1]]<br>结果为 1 0 0 1 0 0 0 0 1</p><p>为什么使用one-hot编码来处理离散型特征?<br>————————————————————————————————————————</p><p>在回归，分类，聚类等机器学习算法中，特征之间距离的计算或相似度的计算是非常重要的，而我们常用的距离或相似度的计算都是在欧式空间的相似度计算，计算余弦相似性，基于的就是欧式空间。</p><p>而我们使用one-hot编码，将离散特征的取值扩展到了欧式空间，离散特征的某个取值就对应欧式空间的某个点。</p><p>将离散型特征使用one-hot编码，确实会让特征之间的距离计算更加合理。</p><p>比如，有一个离散型特征，代表工作类型，该离散型特征，共有三个取值，不使用one-hot编码，其表示分别是x_1 = (1), x_2 = (2), x_3 = (3)。两个工作之间的距离是，(x_1, x_2) = 1, d(x_2, x_3) = 1, d(x_1, x_3) = 2。那么x_1和x_3工作之间就越不相似吗？显然这样的表示，计算出来的特征的距离是不合理。那如果使用one-hot编码，则得到x_1 = (1, 0, 0), x_2 = (0, 1, 0), x_3 = (0, 0, 1)，那么两个工作之间的距离就都是sqrt(2).即每两个工作之间的距离是一样的，显得更合理。</p><p>不需要使用one-hot编码来处理的情况<br>————————————————————————————————————————</p><p>将离散型特征进行one-hot编码的作用，是为了让距离计算更合理，但如果特征是离散的，并且不用one-hot编码就可以很合理的计算出距离，那么就没必要进行one-hot编码。</p><p>比如，该离散特征共有1000个取值，我们分成两组，分别是400和600,两个小组之间的距离有合适的定义，组内的距离也有合适的定义，那就没必要用one-hot 编码。</p><p>离散特征进行one-hot编码后，编码后的特征，其实每一维度的特征都可以看做是连续的特征。就可以跟对连续型特征的归一化方法一样，对每一维特征进行归一化。比如归一化到[-1,1]或归一化到均值为0,方差为1。</p><p>作者：NateHuang<br>链接：<a href="https://www.imooc.com/article/35900">https://www.imooc.com/article/35900</a><br>来源：慕课网<br>本文原创发布于慕课网 ，转载请注明出处，谢谢合作</p>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;数据预处理之独热编码-One-Hot）&quot;&gt;&lt;a href=&quot;#数据预处理之独热编码-One-Hot）&quot; class=&quot;headerlink&quot; title=&quot;数据预处理之独热编码(One-Hot）&quot;&gt;&lt;/a&gt;数据预处理之独热编码(One-Hot）&lt;/h3&gt;&lt;h4 id=&quot;转载https-www-imooc-com-article-35900&quot;&gt;&lt;a href=&quot;#转载https-www-imooc-com-article-35900&quot; class=&quot;headerlink&quot; title=&quot;转载https://www.imooc.com/article/35900&quot;&gt;&lt;/a&gt;转载&lt;a href=&quot;https://www.imooc.com/article/35900&quot;&gt;https://www.imooc.com/article/35900&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;在机器学习算法中，我们经常会遇到分类特征，例如：人的性别有男女，祖国有中国，美国，法国等。&lt;br&gt;这些特征值并不是连续的，而是离散的，无序的。通常我们需要对其进行特征数字化。&lt;/p&gt;
-&lt;p&gt;那什么是特征数字化呢？例子如下：&lt;/p&gt;</summary>
     
     
     
