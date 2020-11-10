@@ -109,6 +109,28 @@
   </entry>
   
   <entry>
+    <title>NameNode|SecondaryNameNode|DataNode</title>
+    <link href="http://luo6656.github.io/2020/09/03/BigDataFrame/NM%E5%92%8CSNM%E5%92%8CDN/"/>
+    <id>http://luo6656.github.io/2020/09/03/BigDataFrame/NM%E5%92%8CSNM%E5%92%8CDN/</id>
+    <published>2020-09-02T16:00:00.000Z</published>
+    <updated>2020-11-10T14:44:50.535Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="NameNode-SecondaryNamenode-DataNode"><a href="#NameNode-SecondaryNamenode-DataNode" class="headerlink" title="NameNode|SecondaryNamenode|DataNode"></a>NameNode|SecondaryNamenode|DataNode</h1><h3 id="如何确保NameNode高可用"><a href="#如何确保NameNode高可用" class="headerlink" title="如何确保NameNode高可用"></a>如何确保NameNode高可用</h3><p>由于NameNode需要经常进行随机访问，并响应请求，所以需要将元数据放置内存中。但如果断电，元数据就将丢失，整个集群就无法工作。因此<font color="red">需要在磁盘中备份元数据的<strong>FsImage</strong></font></p><p>但是，当在内存中的元数据更新时，如果同时更新FsImage，就会导致效率过低，但如果不更新，就会发生一致性问题，一旦NameNode节点断电，就会产生数据丢失。</p><p>因此，<font color="red">引入Edits文件(只进行追加操作，效率很高)</font>。每当元数据有更新或者添加元数据时，修改内存中的元数据并追加到Edits中。这样，一旦NameNode节点断电，可以通过FsImage和Edits的合并，合成元数据。</p><h3 id="为何需要SecondaryNameNode"><a href="#为何需要SecondaryNameNode" class="headerlink" title="为何需要SecondaryNameNode"></a>为何需要SecondaryNameNode</h3><a id="more"></a><p>但是，如果长时间添加数据到Edits中，会导致该文件数据过大，效率降低，而且一旦断电，恢复元数据需要的时间过长。因此，需要定期进行FsImage和Edits的合并，如果这个操作由NameNode节点完成，又会效率过低。因此，引入一个新的节点<font color="red">SecondaryNamenode</font>，专门用于<font color="red">FsImage和Edits的合并</font>。</p><h3 id="NameNode和SNameNode工作机制"><a href="#NameNode和SNameNode工作机制" class="headerlink" title="NameNode和SNameNode工作机制"></a>NameNode和SNameNode工作机制</h3><p><img src="https://i.loli.net/2020/11/10/gHjoIe92PS63Wph.png" alt="image-20201110202859240"></p><h5 id="NameNode启动"><a href="#NameNode启动" class="headerlink" title="NameNode启动"></a>NameNode启动</h5><p>（1）第一次启动NameNode格式化后，创建Fsimage和Edits文件。如果不是第一次启动，直接加载编辑日志和镜像文件到内存。</p><p>（2）客户端对元数据进行增删改的请求。</p><p>（3）NameNode记录操作日志，更新滚动日志。</p><p>（4）NameNode在内存中对元数据进行增删改。</p><h5 id="Secondary-NameNode工作"><a href="#Secondary-NameNode工作" class="headerlink" title="Secondary NameNode工作"></a>Secondary NameNode工作</h5><p>（1）Secondary NameNode询问NameNode是否需要CheckPoint。直接带回NameNode是否检查结果。</p><p>（2）Secondary NameNode请求执行CheckPoint。</p><p>（3）NameNode滚动正在写的Edits日志。</p><p>（4）将滚动前的编辑日志和镜像文件拷贝到Secondary NameNode。</p><p>（5）Secondary NameNode加载编辑日志和镜像文件到内存，并合并。</p><p>（6）生成新的镜像文件fsimage.chkpoint。</p><p>（7）拷贝fsimage.chkpoint到NameNode。</p><p>（8）NameNode将fsimage.chkpoint重新命名成fsimage。</p><h3 id="DataNode工作机制"><a href="#DataNode工作机制" class="headerlink" title="DataNode工作机制"></a>DataNode工作机制</h3><p><img src="https://i.loli.net/2020/11/10/tlxP3OJDEj2IeA6.png" alt="image-20201110224010166"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;NameNode-SecondaryNamenode-DataNode&quot;&gt;&lt;a href=&quot;#NameNode-SecondaryNamenode-DataNode&quot; class=&quot;headerlink&quot; title=&quot;NameNode|SecondaryNamenode|DataNode&quot;&gt;&lt;/a&gt;NameNode|SecondaryNamenode|DataNode&lt;/h1&gt;&lt;h3 id=&quot;如何确保NameNode高可用&quot;&gt;&lt;a href=&quot;#如何确保NameNode高可用&quot; class=&quot;headerlink&quot; title=&quot;如何确保NameNode高可用&quot;&gt;&lt;/a&gt;如何确保NameNode高可用&lt;/h3&gt;&lt;p&gt;由于NameNode需要经常进行随机访问，并响应请求，所以需要将元数据放置内存中。但如果断电，元数据就将丢失，整个集群就无法工作。因此&lt;font color=&quot;red&quot;&gt;需要在磁盘中备份元数据的&lt;strong&gt;FsImage&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;但是，当在内存中的元数据更新时，如果同时更新FsImage，就会导致效率过低，但如果不更新，就会发生一致性问题，一旦NameNode节点断电，就会产生数据丢失。&lt;/p&gt;
+&lt;p&gt;因此，&lt;font color=&quot;red&quot;&gt;引入Edits文件(只进行追加操作，效率很高)&lt;/font&gt;。每当元数据有更新或者添加元数据时，修改内存中的元数据并追加到Edits中。这样，一旦NameNode节点断电，可以通过FsImage和Edits的合并，合成元数据。&lt;/p&gt;
+&lt;h3 id=&quot;为何需要SecondaryNameNode&quot;&gt;&lt;a href=&quot;#为何需要SecondaryNameNode&quot; class=&quot;headerlink&quot; title=&quot;为何需要SecondaryNameNode&quot;&gt;&lt;/a&gt;为何需要SecondaryNameNode&lt;/h3&gt;</summary>
+    
+    
+    
+    <category term="大数据框架" scheme="http://luo6656.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>HDFS读写流程</title>
     <link href="http://luo6656.github.io/2020/09/01/BigDataFrame/HDFS%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B/"/>
     <id>http://luo6656.github.io/2020/09/01/BigDataFrame/HDFS%E8%AF%BB%E5%86%99%E6%B5%81%E7%A8%8B/</id>
@@ -396,32 +418,6 @@
 &lt;li&gt;主要思想：如果某个词或短语在一篇文章中出现的概率高，并且在其他文章中很少出现，则认为此词或者短语具有很好的类别区分能力，适合用来分类。&lt;/li&gt;
 &lt;li&gt;作用：用以评估一字词对于一个文件集或一个语料库中的其中一份文件的&lt;font color=red&gt;重要程度&lt;/font&gt;&lt;/li&gt;
 &lt;li&gt;优点：能过滤掉一些常见的却无关紧要的词语，同时保留影响整个文本的重要词语。</summary>
-    
-    
-    
-    <category term="机器学习" scheme="http://luo6656.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习之朴素贝叶斯算法</title>
-    <link href="http://luo6656.github.io/2019/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/"/>
-    <id>http://luo6656.github.io/2019/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/</id>
-    <published>2019-07-24T16:00:00.000Z</published>
-    <updated>2020-10-27T06:39:23.458Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="朴素贝叶斯算法"><a href="#朴素贝叶斯算法" class="headerlink" title="朴素贝叶斯算法"></a>朴素贝叶斯算法</h3><h4 id="概率基础"><a href="#概率基础" class="headerlink" title="概率基础"></a>概率基础</h4><ul><li>联合概率<ul><li>定义：包含多个条件，且所有条件同时成立的概率。</li><li>记作：P(A,B)</li><li>P(A,B) = P(A)P(B)</li></ul></li></ul><a id="more"></a><ul><li><p>条件概率</p><ul><li>定义：就是事件A在另外一个事件B已经发生条件下的发生概率</li><li>记作：P(A|B)</li><li>P(A1,A2|B) = P(A1|B)P(A2|B)</li><li><font color=red>注意</font>：此条件概率的成立，是由于A1,A2相互独立的结果</li></ul></li><li><p><font color=red>朴素贝叶斯算法要求各个特征之间相互独立</font></p></li></ul><h4 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h4><ul><li></li><li><img src="https://img-blog.csdnimg.cn/20190915103849487.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE3MDg2Mw==,size_16,color_FFFFFF,t_70" alt="朴素贝叶斯公式"></li></ul><h4 id="拉普拉斯平滑"><a href="#拉普拉斯平滑" class="headerlink" title="拉普拉斯平滑"></a>拉普拉斯平滑</h4><ul><li>由于可能存在为0的类别，所以使用拉普拉斯平滑系数</li><li>alpha<br><img src="https://img-blog.csdnimg.cn/20190915105008920.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE3MDg2Mw==,size_16,color_FFFFFF,t_70" alt="拉普拉斯平滑系数"></li></ul><h4 id="sklearn朴素贝叶斯算法API"><a href="#sklearn朴素贝叶斯算法API" class="headerlink" title="sklearn朴素贝叶斯算法API"></a>sklearn朴素贝叶斯算法API</h4><ul><li><code>sklearn.naive_bayes.MultinomialNB(alpha = 1.0)</code></li><li>alpha不会对结果产生影响</li></ul><h4 id="朴素贝叶斯分类的优缺点"><a href="#朴素贝叶斯分类的优缺点" class="headerlink" title="朴素贝叶斯分类的优缺点"></a>朴素贝叶斯分类的优缺点</h4><ul><li>优点<ul><li>朴素贝叶斯模型发源于古典数学理论，有稳定的分类效率。</li><li>对缺失值不太敏感，算法比较简单，常用于文本分类。</li><li>分类准确度高，速度快</li></ul></li><li>缺点<ul><li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好</li><li>是在训练集中进行统计词这些工作会对结果造成干扰。</li><li>一般只适用于文本分类</li></ul></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;朴素贝叶斯算法&quot;&gt;&lt;a href=&quot;#朴素贝叶斯算法&quot; class=&quot;headerlink&quot; title=&quot;朴素贝叶斯算法&quot;&gt;&lt;/a&gt;朴素贝叶斯算法&lt;/h3&gt;&lt;h4 id=&quot;概率基础&quot;&gt;&lt;a href=&quot;#概率基础&quot; class=&quot;headerlink&quot; title=&quot;概率基础&quot;&gt;&lt;/a&gt;概率基础&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;联合概率&lt;ul&gt;
-&lt;li&gt;定义：包含多个条件，且所有条件同时成立的概率。&lt;/li&gt;
-&lt;li&gt;记作：P(A,B)&lt;/li&gt;
-&lt;li&gt;P(A,B) = P(A)P(B)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</summary>
     
     
     
