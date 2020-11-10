@@ -6,10 +6,34 @@
   <link href="http://luo6656.github.io/atom.xml" rel="self"/>
   
   <link href="http://luo6656.github.io/"/>
-  <updated>2020-10-30T02:54:33.384Z</updated>
+  <updated>2020-11-10T02:11:33.848Z</updated>
   <id>http://luo6656.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据仓库概述</title>
+    <link href="http://luo6656.github.io/2020/09/19/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E8%BF%B0/"/>
+    <id>http://luo6656.github.io/2020/09/19/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A6%82%E8%BF%B0/</id>
+    <published>2020-09-18T16:00:00.000Z</published>
+    <updated>2020-11-10T02:11:33.848Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="数据仓库概述"><a href="#数据仓库概述" class="headerlink" title="数据仓库概述"></a>数据仓库概述</h1><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h4><ul><li>数据仓库是一个面向主题的、集成的、非易失的且随时间变化的数据集合</li><li>主要用于组织积累的历史数据，并使用分析方法（OLAP、数据分析）进行分析整理，进而辅助决策，为管理者、企业系统提供数据支持，构建商业智能。</li></ul><h4 id="2-特点"><a href="#2-特点" class="headerlink" title="2. 特点"></a>2. 特点</h4><h5 id="1-面向主题"><a href="#1-面向主题" class="headerlink" title="1.面向主题"></a>1.面向主题</h5><p>为数据分析提供服务，根据主题将原始数据集合在一起</p><h5 id="2-集成"><a href="#2-集成" class="headerlink" title="2.集成"></a>2.集成</h5><a id="more"></a><p>原始数据来源于不同数据源，要整合成最终数据，需要经过抽取、清洗、转换的过程</p><h5 id="3-非易失"><a href="#3-非易失" class="headerlink" title="3.非易失"></a>3.非易失</h5><p>保存的数据是一系列历史快照，不允许修改，只允许通过工具进行查询、分析</p><h5 id="4-时变性"><a href="#4-时变性" class="headerlink" title="4.时变性"></a>4.时变性</h5><p>数仓会定期接收、集成新的数据，从而反映出数据的最新变化</p><h4 id="3-数仓-VS-数据库"><a href="#3-数仓-VS-数据库" class="headerlink" title="3. 数仓 VS 数据库"></a>3. 数仓 VS 数据库</h4><p>数据库面向事务设计，属于OLTP系统，主要操作是随机读写；在设计时尽量避免冗余，常采用符合范式规范来设计</p><p>数据仓库面向主题，属于OLAP系统，主要操作是批量读写；关注数据整合，以及分析、处理性能；会有意引入冗余，采用反范式方式设计</p><h4 id="4-MPP传统-VS-Hadoop大数据平台"><a href="#4-MPP传统-VS-Hadoop大数据平台" class="headerlink" title="4. MPP传统 VS Hadoop大数据平台"></a>4. MPP传统 VS Hadoop大数据平台</h4><h5 id="1-传统数据仓库"><a href="#1-传统数据仓库" class="headerlink" title="1. 传统数据仓库"></a>1. 传统数据仓库</h5><p>由关系型数据库组成MPP(大规模并行处理) 集群</p><p><img src="https://i.loli.net/2020/11/10/yCUJ3iVIrX9SPgQ.png" alt="image-20201110093802576"></p><ul><li>传统数仓中常见的技术架构，将单机数据库节点组成集群，提升整体处理处理性能</li><li>节点间为非共享架构，每个节点都有独立的磁盘存储系统和内存系统</li><li>每台数据节点通过专用网络或者商业通用网络互相连接，彼此协同计算，作为整体提供服务</li><li>设计上优先考虑C(一致性),其次A(可用性) , 最后P(分区容错性)</li></ul><h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ul><li>运算方式精细，延迟低、吞吐低</li><li>适合中等规模的结构化数据处理</li></ul><h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6><ul><li>存储位置不透明，通过Hash确定数据所在的物理节点，查询任务在所有节点均会执行</li><li>并行计算时，单节点瓶颈会成为整个系统的短板，容错性差</li><li>分布式事务的实现会导致扩展性降低</li></ul><p><font color="red"><strong>问题</strong></font></p><ul><li>扩展性有限</li><li>热点问题 ：</li></ul><h5 id="2-大数据数据仓库"><a href="#2-大数据数据仓库" class="headerlink" title="2. 大数据数据仓库"></a>2. 大数据数据仓库</h5><p><img src="https://i.loli.net/2020/11/10/QxZysDMXdvjEAwN.png" alt="image-20201110094413401"></p><ul><li>大数据中常见的技术架构，也称为Hadoop架构/批处理架构</li><li>各节点实现场地自治（可以单独运行局部应用），数据在集群中全局透明共享</li><li>每台节点通过局域网或广域网相连，节点间的通信开销较大，在运算要减少数据的移动</li><li>优先考虑P(分区容错性) , A(可用性) , C(一致性)</li></ul><p><font color="red"><strong>问题</strong></font></p><ul><li>SQL支持率</li><li>事务支持</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;数据仓库概述&quot;&gt;&lt;a href=&quot;#数据仓库概述&quot; class=&quot;headerlink&quot; title=&quot;数据仓库概述&quot;&gt;&lt;/a&gt;数据仓库概述&lt;/h1&gt;&lt;h4 id=&quot;1-概念&quot;&gt;&lt;a href=&quot;#1-概念&quot; class=&quot;headerlink&quot; title=&quot;1. 概念&quot;&gt;&lt;/a&gt;1. 概念&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;数据仓库是一个面向主题的、集成的、非易失的且随时间变化的数据集合&lt;/li&gt;
+&lt;li&gt;主要用于组织积累的历史数据，并使用分析方法（OLAP、数据分析）进行分析整理，进而辅助决策，为管理者、企业系统提供数据支持，构建商业智能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;2-特点&quot;&gt;&lt;a href=&quot;#2-特点&quot; class=&quot;headerlink&quot; title=&quot;2. 特点&quot;&gt;&lt;/a&gt;2. 特点&lt;/h4&gt;&lt;h5 id=&quot;1-面向主题&quot;&gt;&lt;a href=&quot;#1-面向主题&quot; class=&quot;headerlink&quot; title=&quot;1.面向主题&quot;&gt;&lt;/a&gt;1.面向主题&lt;/h5&gt;&lt;p&gt;为数据分析提供服务，根据主题将原始数据集合在一起&lt;/p&gt;
+&lt;h5 id=&quot;2-集成&quot;&gt;&lt;a href=&quot;#2-集成&quot; class=&quot;headerlink&quot; title=&quot;2.集成&quot;&gt;&lt;/a&gt;2.集成&lt;/h5&gt;</summary>
+    
+    
+    
+    <category term="数据仓库" scheme="http://luo6656.github.io/categories/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>数据仓库</title>
@@ -405,30 +429,6 @@
 &lt;li&gt;sklearn.preprocessing&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;</summary>
-    
-    
-    
-    <category term="机器学习" scheme="http://luo6656.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>转化器和估计器</title>
-    <link href="http://luo6656.github.io/2019/07/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%BD%AC%E5%8C%96%E5%99%A8%E5%92%8C%E4%BC%B0%E8%AE%A1%E5%99%A8/"/>
-    <id>http://luo6656.github.io/2019/07/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%BD%AC%E5%8C%96%E5%99%A8%E5%92%8C%E4%BC%B0%E8%AE%A1%E5%99%A8/</id>
-    <published>2019-07-14T16:00:00.000Z</published>
-    <updated>2020-10-27T06:48:01.605Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="转化器和估计器"><a href="#转化器和估计器" class="headerlink" title="转化器和估计器"></a>转化器和估计器</h3><h4 id="转化器"><a href="#转化器" class="headerlink" title="转化器"></a>转化器</h4><ul><li>fit():输入数据但不做事情，就是计算平均值，方差等等</li><li>transform(): 通过fit产生的平均值和方差转换数据</li><li>fit_transform() = fit() + transform()</li></ul><h4 id="估计器"><a href="#估计器" class="headerlink" title="估计器"></a>估计器</h4><a id="more"></a><ul><li><p>在sklearn中，估计器(estimator)是一个重要角色，<font color=red>是一类实现了算法的API</font></p></li><li><p>用于分类的估计器：</p><ul><li>sklearn.neighbors  k-近邻算法</li><li>sklearn.naive_bayes  贝叶斯</li><li>sklearn.linear_model.LogisticRegression  逻辑回归</li><li>sklearn.tree   决策树与随机森林</li></ul></li><li><p>用于回归的估计器：</p><ul><li>sklearn.linear_model.LinearRegression  线性回归</li><li>sklearn.linear_model.Ridge   岭回归</li></ul></li><li><p>用于聚类的估计器：</p><ul><li>k-means</li></ul></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;h3 id=&quot;转化器和估计器&quot;&gt;&lt;a href=&quot;#转化器和估计器&quot; class=&quot;headerlink&quot; title=&quot;转化器和估计器&quot;&gt;&lt;/a&gt;转化器和估计器&lt;/h3&gt;&lt;h4 id=&quot;转化器&quot;&gt;&lt;a href=&quot;#转化器&quot; class=&quot;headerlink&quot; title=&quot;转化器&quot;&gt;&lt;/a&gt;转化器&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;fit():输入数据但不做事情，就是计算平均值，方差等等&lt;/li&gt;
-&lt;li&gt;transform(): 通过fit产生的平均值和方差转换数据&lt;/li&gt;
-&lt;li&gt;fit_transform() = fit() + transform()&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;估计器&quot;&gt;&lt;a href=&quot;#估计器&quot; class=&quot;headerlink&quot; title=&quot;估计器&quot;&gt;&lt;/a&gt;估计器&lt;/h4&gt;</summary>
     
     
     
