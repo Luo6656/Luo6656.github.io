@@ -6,10 +6,32 @@
   <link href="http://luo6656.github.io/atom.xml" rel="self"/>
   
   <link href="http://luo6656.github.io/"/>
-  <updated>2020-11-10T07:29:07.808Z</updated>
+  <updated>2020-11-13T02:26:05.241Z</updated>
   <id>http://luo6656.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>YARN</title>
+    <link href="http://luo6656.github.io/2020/11/13/BigDataFrame/Flink/"/>
+    <id>http://luo6656.github.io/2020/11/13/BigDataFrame/Flink/</id>
+    <published>2020-11-13T02:26:05.240Z</published>
+    <updated>2020-11-13T02:26:05.241Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Flink"><a href="#Flink" class="headerlink" title="Flink"></a>Flink</h1><h2 id="现在的项目要用到Flink，所以开始修仙学习，及时更博"><a href="#现在的项目要用到Flink，所以开始修仙学习，及时更博" class="headerlink" title="现在的项目要用到Flink，所以开始修仙学习，及时更博"></a>现在的项目要用到Flink，所以开始修仙学习，及时更博</h2>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Flink&quot;&gt;&lt;a href=&quot;#Flink&quot; class=&quot;headerlink&quot; title=&quot;Flink&quot;&gt;&lt;/a&gt;Flink&lt;/h1&gt;&lt;h2 id=&quot;现在的项目要用到Flink，所以开始修仙学习，及时更博&quot;&gt;&lt;a href=&quot;#现在的项目要用到Flink，</summary>
+      
+    
+    
+    
+    <category term="大数据框架" scheme="http://luo6656.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>数据仓库-建模</title>
@@ -414,21 +436,6 @@
     
     
     <category term="BI工具" scheme="http://luo6656.github.io/categories/BI%E5%B7%A5%E5%85%B7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Kettle</title>
-    <link href="http://luo6656.github.io/2020/05/03/ETL/Kettle/"/>
-    <id>http://luo6656.github.io/2020/05/03/ETL/Kettle/</id>
-    <published>2020-05-02T16:00:00.000Z</published>
-    <updated>2020-10-30T02:56:37.009Z</updated>
-    
-    
-    
-    
-    <category term="ETL工具" scheme="http://luo6656.github.io/categories/ETL%E5%B7%A5%E5%85%B7/"/>
     
     
   </entry>
