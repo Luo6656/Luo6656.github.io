@@ -6,10 +6,30 @@
   <link href="http://luo6656.github.io/atom.xml" rel="self"/>
   
   <link href="http://luo6656.github.io/"/>
-  <updated>2020-11-13T02:38:11.393Z</updated>
+  <updated>2020-11-14T06:45:27.856Z</updated>
   <id>http://luo6656.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://luo6656.github.io/2020/11/14/BigDataFrame/Canal/"/>
+    <id>http://luo6656.github.io/2020/11/14/BigDataFrame/Canal/</id>
+    <published>2020-11-14T06:46:05.067Z</published>
+    <updated>2020-11-14T06:45:27.856Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Canal"><a href="#Canal" class="headerlink" title="Canal"></a>Canal</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: Canal</span><br><span class="line">type: 原创</span><br><span class="line">category: 大数据框架</span><br><span class="line">hide: false</span><br><span class="line">date: 2020&#x2F;11&#x2F;05</span><br><span class="line">author: Eric</span><br></pre></td></tr></table></figure><h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><p>MySQL 数据库增量日志并解析binlog日志，提供增量数据订阅和消费</p><h3 id="二、使用场景"><a href="#二、使用场景" class="headerlink" title="二、使用场景"></a>二、使用场景</h3><ul><li>数据库镜像</li><li>数据库实时备份</li><li>索引构建和实时维护(拆分异构索引、倒排索引等)</li><li>业务 cache 刷新</li><li>带业务逻辑的增量数据处理</li><li>跨数据库的数据备份(异构数据库同步)，mysql==&gt;oracle，mysql==&gt;mongo, mysql==&gt;redis, mysql==&gt;elasticsearch</li></ul><h3 id="三、工作原理"><a href="#三、工作原理" class="headerlink" title="三、工作原理"></a>三、工作原理</h3><h4 id="1-传统Mysql主从备份原理"><a href="#1-传统Mysql主从备份原理" class="headerlink" title="1.传统Mysql主从备份原理"></a>1.传统Mysql主从备份原理</h4><p><img src="https://i.loli.net/2020/11/14/BLlwyWrcfS97IY5.png" alt="image-20201114114550842"></p><h4 id="2-canal工作原理"><a href="#2-canal工作原理" class="headerlink" title="2. canal工作原理"></a>2. canal工作原理</h4><p><img src="https://i.loli.net/2020/11/14/TfFabrucvo7UEVs.png" alt="image-20201114114802409"></p><ul><li><strong>canal</strong> 模拟 MySQL slave 的交互协议，伪装自己为 MySQL slave ，向 MySQL master 发送dump 协议</li><li>MySQL master 收到 dump 请求，开始推送 binary log 给 slave (即 <strong>canal</strong> )</li><li><strong>canal</strong> 解析 binary log 对象(原始为 byte 流)</li></ul><h3 id="四、配置"><a href="#四、配置" class="headerlink" title="四、配置"></a>四、配置</h3><p><code>https://blog.csdn.net/qq_32254003/article/details/76837638</code></p><h3 id="五、注意"><a href="#五、注意" class="headerlink" title="五、注意"></a>五、注意</h3><h4 id="Binlog的三种基本类型："><a href="#Binlog的三种基本类型：" class="headerlink" title="Binlog的三种基本类型："></a>Binlog的三种基本类型：</h4><h5 id="1-Row模式"><a href="#1-Row模式" class="headerlink" title="1.Row模式"></a>1.Row模式</h5><p>除了记录sql语句外，还会记录每个字段的变化情况，能够清楚的记录每行数据的变化历史，但是会占用比较多的空间，需要使用mysqlbinlog工具进行查看。<font color="red">用户记录对数据的操作</font></p><h5 id="2-Statement模式"><a href="#2-Statement模式" class="headerlink" title="2.Statement模式"></a>2.Statement模式</h5><p>只记录sql语句，但是没有上下文信息，在进行数据恢复的时候会导致数据丢失。<font color="red">用户对表的操作</font></p><h5 id="3-MIX模式"><a href="#3-MIX模式" class="headerlink" title="3.MIX模式"></a>3.MIX模式</h5><p>较为灵活的记录方式，当遇到表结构变更的时候，就会记录statement模式。当遇到数据更新或者删除情况下就会成row模式。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Canal&quot;&gt;&lt;a href=&quot;#Canal&quot; class=&quot;headerlink&quot; title=&quot;Canal&quot;&gt;&lt;/a&gt;Canal&lt;/h1&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Flink</title>
@@ -416,21 +436,6 @@
     <id>http://luo6656.github.io/2020/05/10/BI/Tebleau/</id>
     <published>2020-05-09T16:00:00.000Z</published>
     <updated>2020-10-30T02:56:36.975Z</updated>
-    
-    
-    
-    
-    <category term="BI工具" scheme="http://luo6656.github.io/categories/BI%E5%B7%A5%E5%85%B7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>PowerBI</title>
-    <link href="http://luo6656.github.io/2020/05/05/BI/PowerBI/"/>
-    <id>http://luo6656.github.io/2020/05/05/BI/PowerBI/</id>
-    <published>2020-05-04T16:00:00.000Z</published>
-    <updated>2020-10-30T02:56:37.042Z</updated>
     
     
     
