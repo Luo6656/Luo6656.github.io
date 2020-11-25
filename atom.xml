@@ -6,10 +6,33 @@
   <link href="http://luo6656.github.io/atom.xml" rel="self"/>
   
   <link href="http://luo6656.github.io/"/>
-  <updated>2020-11-13T02:38:11.393Z</updated>
+  <updated>2020-11-25T03:06:26.210Z</updated>
   <id>http://luo6656.github.io/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kylin</title>
+    <link href="http://luo6656.github.io/2020/11/24/BigDataFrame/Kylin/"/>
+    <id>http://luo6656.github.io/2020/11/24/BigDataFrame/Kylin/</id>
+    <published>2020-11-24T01:59:45.319Z</published>
+    <updated>2020-11-25T03:06:26.210Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Kylin"><a href="#Kylin" class="headerlink" title="Kylin"></a>Kylin</h1><p><font color="red">空间换时间</font></p><h3 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h3><h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h4><p>Apache Kylin是一个开源的分布式分析引擎，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力以支持超大规模数据，最初由eBay开发并贡献至开源社区。它能在亚秒内查询巨大的Hive表。</p><h4 id="2-特点"><a href="#2-特点" class="headerlink" title="2. 特点"></a>2. 特点</h4><p>(1) 标准SQL接口</p><p>(2) 支持超大数据集</p><p>(3) 亚秒级响应</p><p>(4) 可伸缩性和高吞吐率</p><p>(5) BI工具集成</p><ul><li>ODBC</li><li>JDBC</li><li>RestAPI</li></ul><h4 id="3-架构"><a href="#3-架构" class="headerlink" title="3. 架构"></a>3. 架构</h4><p><img src="https://i.loli.net/2020/11/24/QyuxT4NkpRBbAw6.png" alt="image-20201124171739192"></p><h5 id="1-REST-Server"><a href="#1-REST-Server" class="headerlink" title="(1) REST Server"></a>(1) REST Server</h5><p>REST Server是一套面向应用程序开发的入口点，旨在实现针对Kylin平台的应用开发工作。 此类应用程序可以提供查询、获取结果、触发cube构建任务、获取元数据以及获取用户权限等等。另外可以通过Restful接口实现SQL查询。</p><h5 id="2-Query-Engine"><a href="#2-Query-Engine" class="headerlink" title="(2) Query Engine"></a>(2) Query Engine</h5><p>当cube准备就绪后，查询引擎就能够获取并解析用户查询。它随后会与系统中的其它组件进行交互，从而向用户返回对应的结果。 </p><h5 id="3-Routing"><a href="#3-Routing" class="headerlink" title="(3) Routing"></a>(3) Routing</h5><p>在最初设计时曾考虑过将Kylin不能执行的查询引导去Hive中继续执行，但在实践后发现Hive与Kylin的速度差异过大，导致用户无法对查询的速度有一致的期望，很可能大多数查询几秒内就返回结果了，而有些查询则要等几分钟到几十分钟，因此体验非常糟糕。最后这个路由功能在发行版中默认关闭。</p><h5 id="4-Metadata"><a href="#4-Metadata" class="headerlink" title="(4) Metadata"></a>(4) Metadata</h5><p>Kylin是一款元数据驱动型应用程序。元数据管理工具是一大关键性组件，用于对保存在Kylin当中的所有元数据进行管理，其中包括最为重要的cube元数据。其它全部组件的正常运作都需以元数据管理工具为基础。 Kylin的元数据存储在hbase中。 </p><h5 id="5-Cube-Build-Engine"><a href="#5-Cube-Build-Engine" class="headerlink" title="(5) Cube Build Engine"></a>(5) Cube Build Engine</h5><p>这套引擎的设计目的在于处理所有离线任务，其中包括shell脚本、Java API以及Map Reduce任务等等。任务引擎对Kylin当中的全部任务加以管理与协调，从而确保每一项任务都能得到切实执行并解决其间出现的故障。</p><h4 id="4-工作原理"><a href="#4-工作原理" class="headerlink" title="4. 工作原理"></a>4. 工作原理</h4><p>MOLAP多维立方体分析</p><h5 id="1-维度和度量"><a href="#1-维度和度量" class="headerlink" title="1. 维度和度量"></a>1. 维度和度量</h5><p>维度：观察数据的角度</p><p>度量：维度的统计值，就是聚合运算的结果</p><h5 id="2-Cube和Cuboid"><a href="#2-Cube和Cuboid" class="headerlink" title="2. Cube和Cuboid"></a>2. Cube和Cuboid</h5><p><font color="red">N个维度，组合就有2的n次方中</font></p><p>每一种维度组合就是一个Cuboid，所有Cuboid整体就是一个Cube</p><h5 id="3-核心算法"><a href="#3-核心算法" class="headerlink" title="3. 核心算法"></a>3. 核心算法</h5><p>Kylin的工作原理就是对数据模型做Cube预计算，并利用计算的结果加速查询</p><p>(1) 指定数据模型，定义维度和度量</p><p>(2) 预计算Cube，计算所有Cuboid并保存为物化视图</p><p>预计算过程是Kylin从Hive中读取原始数据，按照我们选定的维度进行计算，并将结果集保存到Hbase中，默认的计算引擎为MapReduce，可以选择Spark作为计算引擎，一次build的结果，称为Segment。构建过程中会涉及多个Cuboid的创建，具体创建过程由<font color="red">kylin.cube.algorithm</font>参数决定，参数值可选<font color="red">auto，layer和inmem</font>，默认值为auto，即Kylin会通过采集数据动态地选择一个算法(layer or inmem), 如果用户很了解Kylin和自身的数据、集群，可以直接设置喜欢的算法。</p><p>(3) 执行查询，读取Cuboid，运行，产生查询结果</p><h5 id="3-1-逐层构建算法（layer）"><a href="#3-1-逐层构建算法（layer）" class="headerlink" title="3.1 逐层构建算法（layer）"></a>3.1 逐层构建算法（layer）</h5><p><img src="https://i.loli.net/2020/11/24/tF4cmPdxvsg76Cy.png" alt="image-20201124185701419"></p><p>从下向上依次执行n次MR,第一层是根据原始数据计算得出，其余层是根据上一层的结果得出。</p><p>每一轮的计算都是MR任务，且串行执行；一个N维的Cude,至少需要N次MR Job</p><h5 id="算法优点"><a href="#算法优点" class="headerlink" title="算法优点"></a><font color="red">算法优点</font></h5><p>(1) 此算法充分利用MapReduce的能力，处理了中间复杂的排序和洗牌工作，故而算法代码清晰简单，易于维护；</p><p>(2) 受益于Hadoop的日趋成熟，此算法对集群要求低，运行稳定；在内部维护Kylin的过程中，很少遇到在这几步出错的情况；即便是在Hadoop集群比较繁忙的时候，任务也能完成。</p><h5 id="算法缺点"><a href="#算法缺点" class="headerlink" title="算法缺点"></a><font color="red">算法缺点</font></h5><p>(1) 当Cube有很多维度的时候，所需要的MapReduce任务也相应增加；由于Hadoop的任务调度需要耗费额外资源，特别是集群较庞大的时候，反复递交任务造成的额外开销会相当可观；</p><p>(2) 由于Mapper不做预聚合，此算法会对Hadoop MapReduce输出较多数据；虽然已经使用了Combiner来减少从Mapper端到Reducer端的数据传输，所有数据依然需要通过Hadoop MapReduce来排序和组合才能被聚合，无形之中增加了集群的压力</p><p>(3) 对HDFS的读写操作较多：由于每一层计算的输出会用作下一层计算的输入，这颗Key-Value需要写到HDFS上；当所有计算都完成后，Kylin还需要额外的一轮任务将这些文件转成HBase的HFile格式，以导入到HBase中去；</p><p><font color="red">总体而言，该算法的效率较低，尤其是当Cube维度数较大的时候</font></p><h5 id="3-2-快速构建算法（inmem"><a href="#3-2-快速构建算法（inmem" class="headerlink" title="3.2 快速构建算法（inmem)"></a>3.2 快速构建算法（inmem)</h5><p><img src="https://i.loli.net/2020/11/24/v7wSHXrmn198soL.png" alt="image-20201124192311508"></p><p>也被称作“逐段”(By Segment) 或“逐块”(By Split) 算法，从1.5.x开始引入该算法，该算法的主要思想是，每个Mapper将其所分配到的数据块，计算成一个完整的小Cube 段（包含所有Cuboid）。每个Mapper将计算完的Cube段输出给Reducer做合并，生成大Cube，也就是最终结果。如图所示解释了此流程。</p><p>无论多少维度，都是一个MR Job完成</p><p>与旧算法相比，两点不同：</p><p>(1) Mapper会利用内存做预聚合，算出所有组合；Mapper输出的每个Key都是不同的，这样会减少输出到Hadoop MapReduce的数据量，Combiner也不再需要；</p><p>(2) 一轮Map Reduce便会完成所有层次的计算，减少Hadoop任务的调配。</p><h3 id="二、环境搭建"><a href="#二、环境搭建" class="headerlink" title="二、环境搭建"></a>二、环境搭建</h3><h3 id="三、创建项目"><a href="#三、创建项目" class="headerlink" title="三、创建项目"></a>三、创建项目</h3><h4 id="1-创建工程"><a href="#1-创建工程" class="headerlink" title="1. 创建工程"></a>1. 创建工程</h4><h4 id="2-选择数据源"><a href="#2-选择数据源" class="headerlink" title="2. 选择数据源"></a>2. 选择数据源</h4><h4 id="3-创建Model"><a href="#3-创建Model" class="headerlink" title="3. 创建Model"></a>3. 创建Model</h4><h4 id="4-创建Cube"><a href="#4-创建Cube" class="headerlink" title="4. 创建Cube"></a>4. 创建Cube</h4><h4 id="5-增量设置"><a href="#5-增量设置" class="headerlink" title="5. 增量设置"></a>5. 增量设置</h4><h3 id="四、数据可视化-BI工具集成"><a href="#四、数据可视化-BI工具集成" class="headerlink" title="四、数据可视化-BI工具集成"></a>四、数据可视化-BI工具集成</h3><h3 id="五、Cube构建优化"><a href="#五、Cube构建优化" class="headerlink" title="五、Cube构建优化"></a>五、Cube构建优化</h3><p>问题：假设有20个维度就会有2的20次方个Cuboid，对构建引擎、存储引擎都会产生很大的压力。</p><p>解决：在构建维度数量较多的Cube时，要注意Cube的<font color="red">剪枝优化（即减少Cuboid的生成）</font></p><p>(1) Cube中的维度数量较多，且没有进行很好的Cuboid剪枝优化，导致Cuboid数量很多；</p><p>(2) Cube中存在较高基数的维度，导致包含这类维度的每一个Cuboid占用的空间都很大，这些Cuboid累积造成整体Cube体积变大</p><h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><h5 id="1-使用聚合组"><a href="#1-使用聚合组" class="headerlink" title="1. 使用聚合组"></a>1. 使用聚合组</h5><p>假设A、B、C三个维度</p><p>(1) 强制维度(Mandatory Dimensions)</p><p>​      强制A维度必须存在</p><p>​       0、A、AB、AC、ABC</p><p>(2) 层级维度(Hierarchy Dimensions)</p><p>​       A、B是层级关系，那么就B就不能单独出现</p><p>​       0、A、C、AB、AC、ABC</p><p>(3) 联合维度(Joint Dimensions) </p><p>​       A、B作为联合维度，AB必须同出现</p><p>​       0、C、AB、ABC</p><h5 id="2-并发粒度优化"><a href="#2-并发粒度优化" class="headerlink" title="2. 并发粒度优化"></a>2. 并发粒度优化</h5><p>当Segment中某一个Cuboid的大小超出一定的阈值时，系统会将该Cuboid的数据分片到多个分区中，以实现Cuboid数据读取的并行化，从而优化Cube的查询速度。具体的实现方式如下：构建引擎根据Segment估计的大小，以及参数“<font color="red">kylin.hbase.region.cut</font>”的设置决定Segment在存储引擎中总共需要几个分区来存储，如果存储引擎是HBase，那么分区的数量就对应于HBase中的Region数量。kylin.hbase.region.cut的默认值是5.0，单位是GB，也就是说对于一个大小估计是50GB的Segment，构建引擎会给它分配10个分区。用户还可以通过设置<font color="red">kylin.hbase.region.count.min</font>（默认为1）和<font color="red">kylin.hbase.region.count.max</font>（默认为500）两个配置来决定每个Segment最少或最多被划分成多少个分区。</p><p>由于每个Cube的并发粒度控制不尽相同，因此建议在Cube Designer 的Configuration Overwrites（上图所示）中为每个Cube量身定制控制并发粒度的参数。假设将把当前Cube的kylin.hbase.region.count.min设置为2，kylin.hbase.region.count.max设置为100。这样无论Segment的大小如何变化，它的分区数量最小都不会低于2，最大都不会超过100。相应地，这个Segment背后的存储引擎（HBase）为了存储这个Segment，也不会使用小于两个或超过100个的分区。我们还调整了默认的kylin.hbase.region.cut，这样50GB的Segment基本上会被分配到50个分区，相比默认设置，我们的Cuboid可能最多会获得5倍的并发量。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Kylin&quot;&gt;&lt;a href=&quot;#Kylin&quot; class=&quot;headerlink&quot; title=&quot;Kylin&quot;&gt;&lt;/a&gt;Kylin&lt;/h1&gt;&lt;p&gt;&lt;font color=&quot;red&quot;&gt;空间换时间&lt;/font&gt;&lt;/p&gt;
+&lt;h3 id=&quot;一、概述&quot;&gt;&lt;a href=&quot;</summary>
+      
+    
+    
+    
+    <category term="大数据框架" scheme="http://luo6656.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Flink</title>
@@ -434,21 +457,6 @@
     
     
     <category term="大数据框架" scheme="http://luo6656.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A1%86%E6%9E%B6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Tebleau</title>
-    <link href="http://luo6656.github.io/2020/05/10/BI/Tebleau/"/>
-    <id>http://luo6656.github.io/2020/05/10/BI/Tebleau/</id>
-    <published>2020-05-09T16:00:00.000Z</published>
-    <updated>2020-10-30T02:56:36.975Z</updated>
-    
-    
-    
-    
-    <category term="BI工具" scheme="http://luo6656.github.io/categories/BI%E5%B7%A5%E5%85%B7/"/>
     
     
   </entry>
